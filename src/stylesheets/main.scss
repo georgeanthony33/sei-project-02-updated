@@ -1,0 +1,102 @@
+.home-page-background {
+  background-image: url('https://payload.cargocollective.com/1/8/273621/11368201/jck_chronos.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  padding-left: 0;
+  margin: 0;
+}
+
+.container.home-page {
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.color-overlay {
+  height: 100vh;
+  width: 100vw;
+  background-color: #041a16;
+  opacity: 0.8;
+  position: absolute;
+}
+
+.event-input {
+  text-align: center;
+}
+
+.index-page {
+  height: 100vh;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content {
+  margin-top: auto;
+}
+
+.card-border {
+  border: hsl(171, 100%, 41%) solid 3px;
+  border-radius: 10px;
+}
+
+.show-banner {
+  background-color: hsl(0, 0%, 96%);
+  padding-top: 30px;
+}
+
+.show-image-fig {
+  height: 225px;
+  width: 225px;
+}
+
+.show-image {
+  border: hsl(171, 100%, 41%) solid 3px;
+  border-radius: 10px;
+}
+
+.show-page-background {
+  background-color: hsl(0, 0%, 21%);
+  padding: 30px 0;
+}
+
+.show-page-body {
+  margin: 10px 150px;
+  padding: 50px;
+  background-color: hsl(0, 0%, 96%);
+  border: hsl(171, 100%, 41%) solid 5px;
+  border-radius: 10px;
+}
+
+.map {
+  display: flex;
+  justify-content: center;
+}
+
+.marker {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: red;
+  transform: translate(-50%, 50%);
+  z-index: 1;
+}
+
+.address-details {
+  margin-bottom: 5px;
+}
+
+.no-result-navbar {
+  display: flex;
+  position: fixed;
+}
+
+.no-result-background {
+  display: flex;
+  position: relative;
+  // margin-top: -50px;
+}
