@@ -1,24 +1,70 @@
-.home-page-background {
-  background-image: url('https://payload.cargocollective.com/1/8/273621/11368201/jck_chronos.gif');
-  background-repeat: no-repeat;
+.homepage-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: top url('https://steemitimages.com/DQmTrscBhGg3cLSecpUtCP7tKQNHSmagXU2z8knPWeyaCP9/Music-Wallpaper-HD-1080p-42.jpg');
+  background-repeat: repeat;
   background-size: cover;
-  min-height: 100vh;
-  padding-left: 0;
-  margin: 0;
-}
-
-.container.home-page {
-  z-index: 1;
-  padding: 0;
-  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
 }
 
 .color-overlay {
   height: 100vh;
   width: 100vw;
-  background-color: #041a16;
-  opacity: 0.8;
+  background-color: #000000;
+  opacity: 0.80;
   position: absolute;
+}
+
+.homepage-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.title-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 600px;
+}
+
+.title-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 550px;
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+.home-title {
+  letter-spacing: 4px;
+  font-size: 60px;
+  text-align: center;
+  color: white;
+  z-index: 1;
+  font-weight: 900;
+  word-spacing: 3px;
+}
+
+.search-outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 325px;
+  width: 400px;
+  z-index: 1;
+  color: white;
 }
 
 .event-input {
