@@ -98,5 +98,5 @@ The Event ID is then taken from the URL and used to make an Axios request for da
 ### Future Features
 
 * Convert dates from YYYY-MM-DD into a more presentable format.
-* Fix formatting issue with apostrophes appearing as HTML Character Reference code
+* Fix formatting issue with apostrophes appearing as HTML Character Reference code.
 * Enable movement and zoom on Event Show Page map.
