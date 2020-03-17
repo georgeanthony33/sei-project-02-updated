@@ -1,68 +1,102 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #2: Reacathon
+![ga_cog_large_red_rgb](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png)
 
-## Overview
+# Software Engineering Immersive: Project 2
+This is my second project of the General Assembly Software Engineering Immersive course (Week 6). It was a 3 day Pair-Programming project.
 
-The second project is to **build a React application** that consumes a **public API**.
+## Installation
 
-### Technical Requirements
+* Clone or download the Repository
+* In the terminal enter the following commands:
 
-Your app must:
+```
+<!-- To install all the packages listed in the package.json: -->
+$ npm i
+<!-- Run the app in your localhost: -->
+$ npm run develop
+<!-- Check the console for any issues and if there are check the package.json for any dependancies missing  -->
+```
 
-* **Consume a public API** – this could be anything but it must make sense for your project.
-* **Have several components** - At least one classical and one functional.
-* **The app should include a router** - with several "pages".
-* **Include wireframes** - that you designed before building the app.
-* Have **semantically clean HTML** - you make sure you write HTML that makes structural sense rather than thinking about how it might look, which is the job of CSS.
-* **Be deployed online** and accessible to the public.
+## Deployment
 
----
+The game is deployed on Heroku and can be found [here](fun-findr.herokuapp.com).
 
-## Necessary Deliverables
+## Technology Use
 
-* A **working application**, hosted somewhere on the internet
-* A **link to your hosted working app** in the URL section of your Github repo
-* A **git repository hosted on Github**, with a link to your hosted project, and frequent commits dating back to the _very beginning_ of the project
+* Node.js
+* React
+* Express
+* Axios
+* SCSS
+* Bulma
+* Google Fonts
+* Git
+* GitHub
+* Skiddle Events API
+* Mapbox API
 
----
+## Website Architecture
 
-## Suggested Ways to Get Started
+### Overview
 
-* **Don’t hesitate to write throwaway code** to solve short term problems.
-* **Read the docs for whatever technologies / frameworks / APIs you use**.
-* **Write DRY code**.
-* **Be consistent with your code style.**
-* **Commit early, commit often.** Don’t be afraid to break something because you can always go back in time to a previous version.
-* **Keep user stories small and well-defined**, and remember – user stories focus on what a user needs, not what development tasks need accomplishing.
-* **Write code another developer wouldn't have to ask you about**. Do your naming conventions make sense? Would another developer be able to look at your app and understand what everything is?
-* **Make it all well-formatted.** Are you indenting, consistently? Can we find the start and end of every div, curly brace, etc?
-* **Comment your code.** Will someone understand what is going on in each block or function? Even if it's obvious, explaining the what & why means someone else can pick it up and get it.
-* **Write pseudocode before you write actual code.** Thinking through the logic of something helps.
+The FunFindr app allows users to search events based on keywords, dates and location. The site takes users to a results page, where they can peruse the events open to them given their search preferences. From there, users can click on their chosen event to take them through to an event-specific information page for more details including date, time, location (including a map), price and description of the event.
 
----
+### Skiddle Events API
 
-## Useful Resources
+The Skiddle Events API accepts requests in the form of a URL, with additional specifications for the data request - such as keyword, latitude, longitude or date - embedded into the URL string. No further data is therefore needed to be attached to the request. More information on the API can be found here: https://github.com/Skiddle/web-api
 
-* [List of open APIs](https://any-api.com/)
+### Homepage
 
-* [A collective list of free APIs for use in software and web development.](https://github.com/public-apis/public-apis)
+The objective for the site was very clear and simple - to enable users to find events based off keywords (such as artist names), location and dates. The sole purpose of the homepage therefore is to allow users to input their search preferences and store these parameters in local storage, ready to be embedded into the URL to be sent to the API endpoint from the Events Listings page. Each of the three search parameters are optional, meaning users could choose to leave any or all of them empty. This broadens the search up to a maximum of 100 results - a restriction set by Skiddle on the API.
 
-* [18 Fun APIs For Your Next Project - Victoria Bergquist - Medium](https://medium.com/@vicbergquist/18-fun-apis-for-your-next-project-8008841c7be9)
+![Homepage](src/assets/Homepage.png)
 
-* [Best Free APIs of 2019](https://rapidapi.com/collection/best-free-apis?utm_source=google&utm_medium=cpc&utm_campaign=1757574668_67679208454&utm_term=%2Bfree%20%2Bapis_b&utm_content=1t1&gclid=CjwKCAiAgqDxBRBTEiwA59eENwNUVqPD-v79Cgwl3EWtcRuMZlVGOCxAf5RcH74ZUM6cMKp6o5FZRxoCpVgQAvD_BwE)
+### Event Listings Page
 
+The Event Listings Page retrieves any keywords, locations and dates that were inputted by the user into the Homepage search function. The format of the URL to be sent to the endpoint requires location to be entered as latitude and longitude coordinates. For this reason, a Mapbox API is used to convert the location (which can be a place name or postcode) into coordinates, using the following function:
 
-These are just a few examples of lists of free APIs you could use, there are hundreds out there!
+```JavaScript
+findCoordinates = async (location) => {
+  try {
+    const locationData = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?&access_token=${mapboxToken}`)
+    const eventCoordinates = [locationData.data.features[0].center[0], locationData.data.features[0].center[1]]
+    this.setState({ eventCoordinates })
+    this.searchEventsWithLocation(this.state.searchValues.searchWord, this.state.searchValues.searchDate, this.state.eventCoordinates[0], this.state.eventCoordinates[1])
+  } catch (err) {
+    console.log(err)
+  }
+}
+```
 
----
+With or without each of the search parameters, the search request is then made to the Skiddle API, and the results render on the page, styled with Bulma to appear as easy-to-read Event Cards for each result. A "No Results" page is also connected to the Events Index component in case there are no matches to the user's search preferences.
 
-## Project Feedback + Evaluation
+![EventIndex](src/assets/EventIndex.png)
 
-* __Project Workflow__: Did you complete the user stories, wireframes, task tracking as specified above? Did you use source control as expected for the phase of the program you’re in (detailed above)?
+The Events Card is re-factored into its own component, with the event details (each key-value pair on the event object) being passed as props. Upon clicking on an Event Card, the Event ID is pushed into the URL for the Event Show Page
 
-* __Technical Requirements__: Did you deliver a project that met all the technical requirements? Given what the class has covered so far, did you build something that was reasonably complex?
+### Event Show Page
 
-* __Creativity__: Did you added a personal spin or creative element into your project submission? Did you deliver something of value to the end user (not just a login button and an index page)?
+The Event ID is then taken from the URL and used to make an Axios request for data specifically on that event. The page renders the results, including the details shown on the Event Listing page, together with an event description, opening time, minimum age requirements, price, contact number, address details and a map to show the exact location using Mapbox.
 
-* __Code Quality__: Did you follow code style guidance and best practices covered in class, such as spacing, modularity, and semantic naming? Did you comment your code as your instructors as we have in class?
+![EventShow](src/assets/EventShow.png)
 
-* __Problem Solving__: Are you able to defend why you implemented your solution in a certain way? Can you demonstrated that you thought through alternative implementations? _(Note that this part of your feedback evaluation will take place during your one-on-one code review with your instructors, after you've completed the project.)_
+## Reflections
+
+### Wins
+
+* Having a fully-functional, user-friendly search function which can take in optional parameters for keyword, location and dates.
+* Location can be postcode or placename due to Mapbox being able to convert either into latitude and longitude coordinates.
+* An ergonomic yet sleek homepage design.
+* Generally quite clean and tidy code.
+* Bulma styling provides professional look with minimal CSS hard-coding and cross-component classname complications.
+
+### Challenges
+
+* Tailoring the logic so that it is able to handle empty search inputs for any of the three parameters.
+* Due to the time pressures of this project, it required moments to stop for a second and gain some perspective in order to solve the various challenges that arose along the way.
+* Finding an API that was free and accessible proved to be surprisingly difficult.
+
+### Future Features
+
+* Convert dates from YYYY-MM-DD into a more presentable format.
+* Fix formatting issue with apostrophes appearing as "&#39;"
+* Enable movement and zoom on Event Show Page map.
