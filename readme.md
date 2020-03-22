@@ -6,21 +6,23 @@ This is my second project of the General Assembly Software Engineering Immersive
 ## Installation
 
 * Clone or download the Repository
-* In the terminal enter the following commands:
+* From the project root folder, enter the following commands into the terminal:
 
 ```
 <!-- To install all the packages listed in the package.json: -->
 $ npm i
+
 <!-- Run the app in your localhost: -->
 $ npm run develop
-<!-- Check the console for any issues and if there are check the package.json for any dependancies missing  -->
+
+<!-- Check the console for any issues and if there are any then check the package.json for any missing dependencies -->
 ```
 
 ## Deployment
 
-The game is deployed on Heroku and can be found [here](fun-findr.herokuapp.com).
+The game is deployed on Heroku and can be found here: fun-findr.herokuapp.com
 
-## Technology Use
+## Technologies Used
 
 * Node.js
 * React
