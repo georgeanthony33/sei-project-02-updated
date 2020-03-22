@@ -20,7 +20,7 @@ $ npm run develop
 
 ## Deployment
 
-The game is deployed on Heroku and can be found here: fun-findr.herokuapp.com
+The game is deployed on Heroku and can be found here: https://fun-findr.herokuapp.com/
 
 ## Technologies Used
 
