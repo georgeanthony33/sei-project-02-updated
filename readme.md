@@ -97,6 +97,12 @@ The Event ID is then taken from the URL and used to make an Axios request for da
 * Due to the time pressures of this project, it required moments to stop for a second and gain some perspective in order to solve the various challenges that arose along the way.
 * Finding an API that was free and accessible proved to be surprisingly difficult.
 
+### Key Learnings
+
+* In a time-pressured project like this, it is important to initially set out your objectives and have a clear MVP in mind in order to stay focussed and make progress towards your end goal.
+* Using Bulma provided challenges with regards to making personalised styling modifications, due to the className systems it uses. We soon realised the importance of avoiding modifying Bulma classNames and instead to add our own classNames for styling changes.
+* Using React to build separate components that interact with and can pass data to each other presented the opportunity to learn how to use props and local storage to exchange information between various components.
+
 ### Future Features
 
 * Convert dates from YYYY-MM-DD into a more presentable format.
