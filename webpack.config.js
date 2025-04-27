@@ -8,7 +8,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve('dist'),
+    path: path.resolve('build'),
     publicPath: '/'
   },
   module: {
@@ -44,7 +44,7 @@ module.exports = {
       { from: './src/assets', to: 'assets' }
     ]),
     new webpack.EnvironmentPlugin([
-      'MY_API_KEY',
+      'SKIDDLE_ACCESS_TOKEN',
       'MAPBOX_ACCESS_TOKEN'
     ])
   ]
