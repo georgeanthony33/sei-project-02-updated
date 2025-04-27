@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import MapGL, { Marker } from 'react-map-gl'
-import 'mapbox-gl/dist/mapbox-gl.css'
-const mapboxToken = process.env.MAPBOX_ACCESS_TOKEN
 import { Link } from 'react-router-dom'
-const apiKey = process.env.MY_API_KEY
+import 'mapbox-gl/dist/mapbox-gl.css'
+
+const skiddleAccessToken = process.env.SKIDDLE_ACCESS_TOKEN
+const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN
 
 class EventShow extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class EventShow extends React.Component {
 
   searchEvents = async (eId) => {
     try {
-      const { data } = await axios.get(`https://www.skiddle.com/api/v1/events/${eId}/?api_key=${apiKey}`)
+      const { data } = await axios.get(`https://www.skiddle.com/api/v1/events/${eId}/?api_key=${skiddleAccessToken}`)
       this.setState({ searchResult: data.results })
     } catch (err) {
       console.log(err)
@@ -75,7 +76,7 @@ class EventShow extends React.Component {
             <div className="columns">
               <div className="column is-7 has-text-centered map">
                 <MapGL
-                  mapboxApiAccessToken={mapboxToken}
+                  mapboxApiAccessToken={mapboxAccessToken}
                   height={'400px'}
                   width={'100%'}
                   mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -87,8 +88,12 @@ class EventShow extends React.Component {
                   <Marker
                     latitude={searchResult.venue.latitude * 1}
                     longitude={searchResult.venue.longitude * 1}
+                    style={{
+                      left: '50%',
+                      top: '50%',
+                    }}
                   >
-                    <div className="marker"></div>
+                    <div className="marker" />
                   </Marker>
                   }
                 </MapGL>
